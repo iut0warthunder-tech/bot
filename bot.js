@@ -13,7 +13,7 @@ const client = new Client({
 
 // Configuration - Replace with your actual values
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHaLUqSQQhxEjlZd8nofSHNJJ2DF9xv8KfPjEqdpsQd1EmaImLUQJ7PDDkbqI_tU12/exec';
-const BOT_TOKEN = 'process.env.BOT_TOKEN';
+const BOT_TOKEN = 'NzU0NjgzMjQ2MjUxNDc1MDA0.GluN4-.LballFa6A8tpwCKHMaUjzu0ZW4xzHaCertPH70';
 
 // Store active threads to prevent duplicate processing
 const processedThreads = new Set();
