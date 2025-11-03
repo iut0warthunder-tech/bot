@@ -12,8 +12,8 @@ const client = new Client({
 });
 
 // Configuration - Replace with your actual values
-const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
-const BOT_TOKEN = 'YOUR_BOT_TOKEN';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHaLUqSQQhxEjlZd8nofSHNJJ2DF9xv8KfPjEqdpsQd1EmaImLUQJ7PDDkbqI_tU12/exec';
+const BOT_TOKEN = 'process.env.BOT_TOKEN';
 
 // Store active threads to prevent duplicate processing
 const processedThreads = new Set();
