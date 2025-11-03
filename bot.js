@@ -12,8 +12,8 @@ const client = new Client({
 });
 
 // Configuration - Replace with your actual values
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHaLUqSQQhxEjlZd8nofSHNJJ2DF9xv8KfPjEqdpsQd1EmaImLUQJ7PDDkbqI_tU12/exec';
-const BOT_TOKEN = 'NzU0NjgzMjQ2MjUxNDc1MDA0.GluN4-.LballFa6A8tpwCKHMaUjzu0ZW4xzHaCertPH70';
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/u/1/s/AKfycbyHaLUqSQQhxEjlZd8nofSHNJJ2DF9xv8KfPjEqdpsQd1EmaImLUQJ7PDDkbqI_tU12/exec";
+const BOT_TOKEN = "NzU0NjgzMjQ2MjUxNDc1MDA0.GluN4-.LballFa6A8tpwCKHMaUjzu0ZW4xzHaCertPH70";
 
 // Store active threads to prevent duplicate processing
 const processedThreads = new Set();
@@ -74,21 +74,19 @@ client.on('messageCreate', async (message) => {
 });
 
 async function updateSpreadsheet(message, figures) {
-  // Find or create a row for this forum channel
-  const response = await axios.get(GOOGLE_SCRIPT_URL, {
-    params: { 
-      row: 2, // Default to row 2 - adjust as needed
-      channelId: message.channel.parentId
-    }
-  });
-
-  // Send figure data to Google Apps Script
-  await axios.post(GOOGLE_SCRIPT_URL, null, {
-    params: {
-      updateBalance: 2, // Update row 2
-      amount: figures.join('+') // Sum all figures
-    }
-  });
+  // This is a simplified version - adjust according to your Google Apps Script logic
+  try {
+    // Example: Send data to your Web App
+    await axios.post(GOOGLE_SCRIPT_URL, null, {
+      params: {
+        updateBalance: 2,
+        amount: figures.reduce((sum, num) => sum + parseFloat(num), 0)
+      }
+    });
+  } catch (error) {
+    console.error('Failed to update spreadsheet:', error);
+    throw error;
+  }
 }
 
 // Handle thread creation for new forum posts
@@ -104,5 +102,20 @@ client.on('threadCreate', async (thread) => {
   await thread.send({ embeds: [welcomeEmbed] });
 });
 
-client.login(BOT_TOKEN);
+// Handle errors
+client.on('error', (error) => {
+  console.error('Discord client error:', error);
+});
 
+// Login with token from environment variable
+if (!BOT_TOKEN) {
+  console.error('BOT_TOKEN is required!');
+  process.exit(1);
+}
+
+if (!GOOGLE_SCRIPT_URL) {
+  console.error('GOOGLE_SCRIPT_URL is required!');
+  process.exit(1);
+}
+
+client.login(BOT_TOKEN);
