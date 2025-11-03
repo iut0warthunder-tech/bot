@@ -1,5 +1,5 @@
 {
-  "name": "discord-forum-figure-bot",
+  "name": "discord-figure-bot",
   "version": "1.0.0",
   "description": "A Discord bot that reads figures from forum channels and updates Google Sheets",
   "main": "bot.js",
